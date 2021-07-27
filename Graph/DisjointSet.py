@@ -2,9 +2,9 @@ def find_set_representative(parentGraph, node):
 	if(parentGraph[node] < 0):
 		return node		
 	else:
-		rootNode = find_set_representative(parentGraph, parentGraph[node])
-		parentGraph[node] = rootNode
-		return rootNode
+		representative_node = find_set_representative(parentGraph, parentGraph[node])
+		parentGraph[node] = representative_node
+		return representative_node
 
 def in_same_set(parentGraph, m, n):
 	if m is n:
@@ -13,7 +13,7 @@ def in_same_set(parentGraph, m, n):
 		return False
 	return in_same_set(parentGraph, parentGraph[m], n)
 
-def make_union(parentGraph, m, n):
+def union(parentGraph, m, n):
 	mRoot =  find_set_representative(parentGraph, m)
 	nRoot =  find_set_representative(parentGraph, n)
 
@@ -41,14 +41,14 @@ ipt = [[0,1], [1,2], [2,3], [4,5]]
 print(parentGraph)
 
 for m,n in ipt:
-	make_union(parentGraph, m,n)
+	union(parentGraph, m,n)
 	print(parentGraph)
 	
 print(parentGraph)
 
 print(find_set_representative(parentGraph,1))
 print(find_set_representative(parentGraph,0))
-make_union(parentGraph, 4,2)
+union(parentGraph, 4,2)
 
 print(parentGraph)
 
